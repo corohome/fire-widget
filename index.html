@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRE Life Goal Widget</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif; background: transparent; color: #fff; display: flex; justify-content: center; padding: 8px; }
+  .widget { width: 100%; max-width: 800px; display: flex; gap: 16px; }
+  .countdown-panel { flex: 1; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px; }
+  .countdown-icon { font-size: 28px; margin-bottom: 4px; }
+  .countdown-title { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .countdown-subtitle { font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+  .countdown-grid { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .countdown-unit { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 6px; min-width: 52px; text-align: center; }
+  .countdown-unit .value { font-size: 26px; font-weight: 800; line-height: 1.1; }
+  .countdown-unit .label { font-size: 9px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .countdown-jp { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.5; }
+  .progress-panel { flex: 1; background: #ffffff; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 14px; min-height: 220px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; }
+  .bar-label { font-size: 13px; font-weight: 700; color: #333; min-width: 32px; text-align: right; }
+  .bar-track { flex: 1; height: 14px; background: #f0f0f0; border-radius: 7px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 7px; transition: width 1s ease; }
+  .bar-life .bar-fill { background: linear-gradient(90deg, #2f80ed, #56ccf2); }
+  .bar-year .bar-fill { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
+  .bar-month .bar-fill { background: linear-gradient(90deg, #00b894, #55efc4); }
+  .bar-today .bar-fill { background: linear-gradient(90deg, #fdcb6e, #f39c12); }
+  .bar-info { display: flex; align-items: baseline; gap: 6px; min-width: 160px; }
+  .bar-percent { font-size: 14px; font-weight: 800; color: #222; min-width: 48px; text-align: right; }
+  .bar-detail { font-size: 10px; color: #999; white-space: nowrap; }
+  @media (max-width: 600px) { .widget { flex-direction: column; } .countdown-unit { min-width: 44px; padding: 6px 4px; } .countdown-unit .value { font-size: 20px; } }
+</style>
+</head>
+<body>
+<div class="widget">
+  <div class="countdown-panel">
+    <div class="countdown-icon">🔥</div>
+    <div class="countdown-title">FIRE達成まで</div>
+    <div class="countdown-subtitle">目標：2033年5月14日（45歳）</div>
+    <div class="countdown-grid" id="countdownGrid"></div>
+    <div class="countdown-jp" id="countdownJp"></div>
+  </div>
+  <div class="progress-panel">
+    <div class="bar-row"><span class="bar-label">人生</span><div class="bar-track bar-life"><div class="bar-fill" id="barLife"></div></div><div class="bar-info"><span class="bar-percent" id="pctLife"></span><span class="bar-detail" id="detLife"></span></div></div>
+    <div class="bar-row"><span class="bar-label">今年</span><div class="bar-track bar-year"><div class="bar-fill" id="barYear"></div></div><div class="bar-info"><span class="bar-percent" id="pctYear"></span><span class="bar-detail" id="detYear"></span></div></div>
+    <div class="bar-row"><span class="bar-label">今月</span><div class="bar-track bar-month"><div class="bar-fill" id="barMonth"></div></div><div class="bar-info"><span class="bar-percent" id="pctMonth"></span><span class="bar-detail" id="detMonth"></span></div></div>
+    <div class="bar-row"><span class="bar-label">今日</span><div class="bar-track bar-today"><div class="bar-fill" id="barToday"></div></div><div class="bar-info"><span class="bar-percent" id="pctToday"></span><span class="bar-detail" id="detToday"></span></div></div>
+  </div>
+</div>
+<script>
+const BIRTHDAY=new Date(1988,4,14),FIRE_TARGET=new Date(2033,4,14),LIFE_EXPECTANCY=80;function update(){const now=new Date(),jst=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));const diff=FIRE_TARGET-jst;if(diff<=0){document.getElementById('countdownJp').textContent='🎉 FIRE達成！';document.getElementById('countdownGrid').innerHTML='';return}let years=FIRE_TARGET.getFullYear()-jst.getFullYear(),months=FIRE_TARGET.getMonth()-jst.getMonth(),days=FIRE_TARGET.getDate()-jst.getDate(),hours=FIRE_TARGET.getHours()-jst.getHours(),minutes=FIRE_TARGET.getMinutes()-jst.getMinutes(),seconds=FIRE_TARGET.getSeconds()-jst.getSeconds();if(seconds<0){seconds+=60;minutes--}if(minutes<0){minutes+=60;hours--}if(hours<0){hours+=24;days--}if(days<0){days+=new Date(FIRE_TARGET.getFullYear(),FIRE_TARGET.getMonth(),0).getDate();months--}if(months<0){months+=12;years--}const units=[{v:years,e:'YEARS'},{v:months,e:'MONTHS'},{v:days,e:'DAYS'},{v:hours,e:'HOURS'},{v:minutes,e:'MINS'},{v:seconds,e:'SECS'}];document.getElementById('countdownGrid').innerHTML=units.map(u=>'<div class="countdown-unit"><div class="value">'+String(u.v).padStart(2,'0')+'</div><div class="label">'+u.e+'</div></div>').join('');const jp=[];if(years>0)jp.push(years+'年');if(months>0)jp.push(months+'ヶ月');if(days>0)jp.push(days+'日');document.getElementById('countdownJp').textContent=jp.join('')+'と'+hours+'時間'+minutes+'分'+seconds+'秒';const ageMs=jst-BIRTHDAY,totalLifeMs=LIFE_EXPECTANCY*365.25*24*60*60*1000,lifePct=Math.min(ageMs/totalLifeMs*100,100),ageY=Math.floor(ageMs/(365.25*24*60*60*1000)),ageM=Math.floor((ageMs%(365.25*24*60*60*1000))/(30.44*24*60*60*1000));document.getElementById('barLife').style.width=lifePct+'%';document.getElementById('pctLife').textContent=lifePct.toFixed(1)+'%';document.getElementById('detLife').textContent=ageY+'歳'+ageM+'ヶ月 / '+LIFE_EXPECTANCY+'歳';const ys=new Date(jst.getFullYear(),0,1),ye=new Date(jst.getFullYear()+1,0,1),yp=(jst-ys)/(ye-ys)*100,dy=Math.floor((jst-ys)/864e5)+1,il=(jst.getFullYear()%4===0&&jst.getFullYear()%100!==0)||jst.getFullYear()%400===0,td=il?366:365;document.getElementById('barYear').style.width=yp+'%';document.getElementById('pctYear').textContent=yp.toFixed(1)+'%';document.getElementById('detYear').textContent=dy+'日目 / '+td+'日';const ms=new Date(jst.getFullYear(),jst.getMonth(),1),me=new Date(jst.getFullYear(),jst.getMonth()+1,1),mp=(jst-ms)/(me-ms)*100,dm=jst.getDate(),dim=new Date(jst.getFullYear(),jst.getMonth()+1,0).getDate();document.getElementById('barMonth').style.width=mp+'%';document.getElementById('pctMonth').textContent=mp.toFixed(1)+'%';document.getElementById('detMonth').textContent=dm+'日目 / '+dim+'日';const ts=new Date(jst.getFullYear(),jst.getMonth(),jst.getDate()),tp=(jst-ts)/864e5*100,hh=String(jst.getHours()).padStart(2,'0'),mm=String(jst.getMinutes()).padStart(2,'0');document.getElementById('barToday').style.width=tp+'%';document.getElementById('pctToday').textContent=tp.toFixed(1)+'%';document.getElementById('detToday').textContent=hh+':'+mm+' / 24:00'}update();setInterval(update,1000);
+</script>
+</body>
+</html>
