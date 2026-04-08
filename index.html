@@ -24,7 +24,7 @@
     flex: 1;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     border-radius: 14px;
-    padding: 20px 16px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,17 +34,21 @@
   .countdown-icon { font-size: 24px; margin-bottom: 2px; }
   .countdown-title { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
   .countdown-subtitle { font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
-  .countdown-grid { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3px;
+    width: 100%;
+  }
   .countdown-unit {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 8px;
-    padding: 6px 5px;
-    min-width: 46px;
+    padding: 6px 2px;
     text-align: center;
   }
-  .countdown-unit .value { font-size: 22px; font-weight: 800; line-height: 1.1; }
-  .countdown-unit .label { font-size: 8px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+  .countdown-unit .value { font-size: 20px; font-weight: 800; line-height: 1.1; }
+  .countdown-unit .label { font-size: 7px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 1px; }
   .countdown-jp { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.7); text-align: center; line-height: 1.4; }
   .progress-panel {
     flex: 1;
@@ -71,14 +75,14 @@
   @media (max-width: 600px) {
     body { padding: 4px; }
     .widget { flex-direction: column; gap: 8px; }
-    .countdown-panel { padding: 14px 12px; min-height: auto; border-radius: 12px; }
+    .countdown-panel { padding: 14px 8px; min-height: auto; border-radius: 12px; }
     .countdown-icon { font-size: 20px; margin-bottom: 1px; }
     .countdown-title { font-size: 13px; }
     .countdown-subtitle { font-size: 9px; margin-bottom: 8px; }
-    .countdown-grid { gap: 4px; }
-    .countdown-unit { min-width: 40px; padding: 4px 3px; border-radius: 6px; }
-    .countdown-unit .value { font-size: 18px; }
-    .countdown-unit .label { font-size: 7px; }
+    .countdown-grid { gap: 3px; }
+    .countdown-unit { padding: 4px 2px; border-radius: 6px; }
+    .countdown-unit .value { font-size: 17px; }
+    .countdown-unit .label { font-size: 6px; }
     .countdown-jp { margin-top: 6px; font-size: 11px; }
     .progress-panel { padding: 14px 12px; min-height: auto; gap: 12px; border-radius: 12px; }
     .bar-row { gap: 8px; }
