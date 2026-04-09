@@ -24,42 +24,80 @@
     flex: 1;
     background: #1e1e1e;
     border-radius: 14px;
-    padding: 30px 16px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 280px;
+    min-height: 200px;
   }
-  .countdown-icon { font-size: 30px; margin-bottom: 4px; }
+  .countdown-icon { font-size: 24px; margin-bottom: 2px; }
   .countdown-title { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
   .countdown-subtitle { font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
   .countdown-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 6px;
+    gap: 3px;
     width: 100%;
   }
   .countdown-unit {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
     border-radius: 8px;
-    padding: 8px 3px;
+    padding: 6px 2px;
     text-align: center;
   }
-  .countdown-unit .value { font-size: 20px; font-weight: 800; line-height: 1.1; }
-  .countdown-unit .label { font-size: 7px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 1px; }
-  .countdown-jp { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.7); text-align: center; line-height: 1.4; }
+  .countdown-unit .value { font-size: 22px; font-weight: 800; line-height: 1.2; }
+  .countdown-unit .label { font-size: 7px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 1px; }
+  .countdown-jp { margin-top: 8px; font-size: 12px; color: rgba(255,255,255,0.45); text-align: center; }
+
+  /* FIRE progress bar in countdown panel */
+  .fire-progress {
+    width: 100%;
+    margin-top: 14px;
+    padding: 0 6px;
+  }
+  .fire-progress .bar-row { display: flex; align-items: center; gap: 8px; }
+  .fire-progress .bar-label { font-size: 16px; min-width: 26px; text-align: center; }
+  .fire-progress .bar-track {
+    flex: 1;
+    height: 14px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+  }
+  .fire-progress .bar-fill {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 1s ease;
+    background: linear-gradient(90deg, #e17055, #fdcb6e, #e17055);
+    background-size: 200% 100%;
+    animation: fireShimmer 3s ease infinite;
+  }
+  @keyframes fireShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .fire-progress .bar-info {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    min-width: 130px;
+  }
+  .fire-progress .bar-percent { font-size: 15px; font-weight: 700; min-width: 44px; text-align: right; }
+  .fire-progress .bar-detail { font-size: 10px; color: rgba(255,255,255,0.45); }
+
   .progress-panel {
     flex: 1;
     background: #1e1e1e;
     border-radius: 14px;
-    padding: 30px 18px;
+    padding: 20px 18px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 22px;
-    min-height: 280px;
+    gap: 16px;
+    min-height: 200px;
   }
   .bar-row { display: flex; align-items: center; gap: 10px; }
   .bar-label { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.85); min-width: 34px; text-align: right; }
@@ -69,11 +107,11 @@
   .bar-year .bar-fill { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
   .bar-month .bar-fill { background: linear-gradient(90deg, #00b894, #55efc4); }
   .bar-today .bar-fill { background: linear-gradient(90deg, #fdcb6e, #f39c12); }
-  .bar-info { display: flex; align-items: baseline; gap: 5px; min-width: 160px; }
-  .bar-percent { font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.9); min-width: 50px; text-align: right; }
-  .bar-detail { font-size: 11px; color: rgba(255,255,255,0.5); white-space: nowrap; }
+  .bar-info { display: flex; align-items: baseline; gap: 5px; min-width: 150px; }
+  .bar-percent { font-size: 16px; font-weight: 700; min-width: 48px; text-align: right; }
+  .bar-detail { font-size: 10px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+
   @media (max-width: 600px) {
-    body { padding: 4px; }
     .widget { flex-direction: column; gap: 8px; }
     .countdown-panel { padding: 14px 8px; min-height: auto; border-radius: 12px; }
     .countdown-icon { font-size: 20px; margin-bottom: 1px; }
@@ -84,6 +122,10 @@
     .countdown-unit .value { font-size: 17px; }
     .countdown-unit .label { font-size: 6px; }
     .countdown-jp { margin-top: 6px; font-size: 11px; }
+    .fire-progress { margin-top: 10px; }
+    .fire-progress .bar-track { height: 12px; }
+    .fire-progress .bar-percent { font-size: 14px; }
+    .fire-progress .bar-info { min-width: 120px; }
     .progress-panel { padding: 14px 12px; min-height: auto; gap: 12px; border-radius: 12px; }
     .bar-row { gap: 8px; }
     .bar-label { font-size: 13px; min-width: 30px; }
@@ -100,93 +142,141 @@
     <div class="countdown-icon">🔥</div>
     <div class="countdown-title">FIRE達成まで</div>
     <div class="countdown-subtitle">目標：2033年5月14日（45歳）</div>
-    <div class="countdown-grid" id="countdownGrid"></div>
-    <div class="countdown-jp" id="countdownJp"></div>
+    <div class="countdown-grid">
+      <div class="countdown-unit"><div class="value" id="cy">--</div><div class="label">YEARS</div></div>
+      <div class="countdown-unit"><div class="value" id="cmo">--</div><div class="label">MONTHS</div></div>
+      <div class="countdown-unit"><div class="value" id="cd">--</div><div class="label">DAYS</div></div>
+      <div class="countdown-unit"><div class="value" id="ch">--</div><div class="label">HOURS</div></div>
+      <div class="countdown-unit"><div class="value" id="cmi">--</div><div class="label">MINS</div></div>
+      <div class="countdown-unit"><div class="value" id="cs">--</div><div class="label">SECS</div></div>
+    </div>
+    <div class="countdown-jp" id="cjp"></div>
+
+    <!-- FIRE Progress Bar -->
+    <div class="fire-progress">
+      <div class="bar-row">
+        <span class="bar-label">🔥</span>
+        <div class="bar-track">
+          <div class="bar-fill" id="fire-fill"></div>
+        </div>
+        <div class="bar-info">
+          <span class="bar-percent" id="fire-pct"></span>
+          <span class="bar-detail" id="fire-detail"></span>
+        </div>
+      </div>
+    </div>
   </div>
+
   <div class="progress-panel">
     <div class="bar-row">
       <span class="bar-label">人生</span>
-      <div class="bar-track bar-life"><div class="bar-fill" id="barLife"></div></div>
-      <div class="bar-info"><span class="bar-percent" id="pctLife"></span><span class="bar-detail" id="detLife"></span></div>
+      <div class="bar-track bar-life"><div class="bar-fill" id="life-fill"></div></div>
+      <div class="bar-info"><span class="bar-percent" id="life-pct"></span><span class="bar-detail" id="life-detail"></span></div>
     </div>
     <div class="bar-row">
       <span class="bar-label">今年</span>
-      <div class="bar-track bar-year"><div class="bar-fill" id="barYear"></div></div>
-      <div class="bar-info"><span class="bar-percent" id="pctYear"></span><span class="bar-detail" id="detYear"></span></div>
+      <div class="bar-track bar-year"><div class="bar-fill" id="year-fill"></div></div>
+      <div class="bar-info"><span class="bar-percent" id="year-pct"></span><span class="bar-detail" id="year-detail"></span></div>
     </div>
     <div class="bar-row">
       <span class="bar-label">今月</span>
-      <div class="bar-track bar-month"><div class="bar-fill" id="barMonth"></div></div>
-      <div class="bar-info"><span class="bar-percent" id="pctMonth"></span><span class="bar-detail" id="detMonth"></span></div>
+      <div class="bar-track bar-month"><div class="bar-fill" id="month-fill"></div></div>
+      <div class="bar-info"><span class="bar-percent" id="month-pct"></span><span class="bar-detail" id="month-detail"></span></div>
     </div>
     <div class="bar-row">
       <span class="bar-label">今日</span>
-      <div class="bar-track bar-today"><div class="bar-fill" id="barToday"></div></div>
-      <div class="bar-info"><span class="bar-percent" id="pctToday"></span><span class="bar-detail" id="detToday"></span></div>
+      <div class="bar-track bar-today"><div class="bar-fill" id="today-fill"></div></div>
+      <div class="bar-info"><span class="bar-percent" id="today-pct"></span><span class="bar-detail" id="today-detail"></span></div>
     </div>
   </div>
 </div>
+
 <script>
-const BIRTHDAY = new Date(1988, 4, 14);
-const FIRE_TARGET = new Date(2033, 4, 14);
-const LIFE_EXPECTANCY = 80;
-function update() {
-  const now = new Date();
-  const jst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-  const diff = FIRE_TARGET - jst;
-  if (diff <= 0) { document.getElementById('countdownJp').textContent = '🎉 FIRE達成！'; document.getElementById('countdownGrid').innerHTML = ''; return; }
-  let years = FIRE_TARGET.getFullYear() - jst.getFullYear();
-  let months = FIRE_TARGET.getMonth() - jst.getMonth();
-  let days = FIRE_TARGET.getDate() - jst.getDate();
-  let hours = FIRE_TARGET.getHours() - jst.getHours();
-  let minutes = FIRE_TARGET.getMinutes() - jst.getMinutes();
-  let seconds = FIRE_TARGET.getSeconds() - jst.getSeconds();
-  if (seconds < 0) { seconds += 60; minutes--; }
-  if (minutes < 0) { minutes += 60; hours--; }
-  if (hours < 0) { hours += 24; days--; }
-  if (days < 0) { const pm = new Date(FIRE_TARGET.getFullYear(), FIRE_TARGET.getMonth(), 0); days += pm.getDate(); months--; }
-  if (months < 0) { months += 12; years--; }
-  const units = [
-    { value: years, en: 'YEARS' }, { value: months, en: 'MONTHS' }, { value: days, en: 'DAYS' },
-    { value: hours, en: 'HOURS' }, { value: minutes, en: 'MINS' }, { value: seconds, en: 'SECS' }
-  ];
-  document.getElementById('countdownGrid').innerHTML = units.map(u => '<div class="countdown-unit"><div class="value">' + String(u.value).padStart(2,'0') + '</div><div class="label">' + u.en + '</div></div>').join('');
-  const jp = [];
-  if (years > 0) jp.push(years + '年');
-  if (months > 0) jp.push(months + 'ヶ月');
-  if (days > 0) jp.push(days + '日');
-  document.getElementById('countdownJp').textContent = jp.join('') + 'と' + hours + '時間' + minutes + '分' + seconds + '秒';
-  const ageMs = jst - BIRTHDAY;
-  const totalLifeMs = LIFE_EXPECTANCY * 365.25 * 24 * 3600000;
-  const lifePct = Math.min((ageMs / totalLifeMs) * 100, 100);
-  const ageY = Math.floor(ageMs / (365.25 * 24 * 3600000));
-  const ageM = Math.floor((ageMs % (365.25 * 24 * 3600000)) / (30.44 * 24 * 3600000));
-  document.getElementById('barLife').style.width = lifePct + '%';
-  document.getElementById('pctLife').textContent = lifePct.toFixed(1) + '%';
-  document.getElementById('detLife').textContent = ageY + '歳' + ageM + 'ヶ月 / ' + LIFE_EXPECTANCY + '歳';
-  const ys = new Date(jst.getFullYear(), 0, 1), ye = new Date(jst.getFullYear()+1, 0, 1);
-  const yp = ((jst - ys) / (ye - ys)) * 100;
-  const doy = Math.floor((jst - ys) / 86400000) + 1;
-  const leap = (jst.getFullYear() % 4 === 0 && jst.getFullYear() % 100 !== 0) || jst.getFullYear() % 400 === 0;
-  document.getElementById('barYear').style.width = yp + '%';
-  document.getElementById('pctYear').textContent = yp.toFixed(1) + '%';
-  document.getElementById('detYear').textContent = doy + '日目 / ' + (leap ? 366 : 365) + '日';
-  const ms = new Date(jst.getFullYear(), jst.getMonth(), 1), me = new Date(jst.getFullYear(), jst.getMonth()+1, 1);
-  const mp = ((jst - ms) / (me - ms)) * 100;
-  const dim = new Date(jst.getFullYear(), jst.getMonth()+1, 0).getDate();
-  document.getElementById('barMonth').style.width = mp + '%';
-  document.getElementById('pctMonth').textContent = mp.toFixed(1) + '%';
-  document.getElementById('detMonth').textContent = jst.getDate() + '日目 / ' + dim + '日';
-  const ts = new Date(jst.getFullYear(), jst.getMonth(), jst.getDate());
-  const tp = ((jst - ts) / 86400000) * 100;
-  const hh = String(jst.getHours()).padStart(2,'0'), mm = String(jst.getMinutes()).padStart(2,'0');
-  document.getElementById('barToday').style.width = tp + '%';
-  document.getElementById('pctToday').textContent = tp.toFixed(1) + '%';
-  document.getElementById('detToday').textContent = hh + ':' + mm + ' / 24:00';
-}
-update();
-setInterval(update, 1000);
+  const BIRTHDAY = new Date(1988, 4, 14);
+  const FIRE_TARGET = new Date(2033, 4, 14);
+  const LIFE_EXPECTANCY = 80;
+
+  function update() {
+    const now = new Date();
+    const jst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+
+    // --- Countdown ---
+    const diff = FIRE_TARGET - jst;
+    let years = 0, months = 0, days = 0, hours = 0, minutes = 0, seconds = 0;
+    if (diff > 0) {
+      const tmp = new Date(jst);
+      years = FIRE_TARGET.getFullYear() - tmp.getFullYear();
+      months = FIRE_TARGET.getMonth() - tmp.getMonth();
+      days = FIRE_TARGET.getDate() - tmp.getDate();
+      hours = -tmp.getHours(); minutes = -tmp.getMinutes(); seconds = -tmp.getSeconds();
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
+      if (days < 0) {
+        const pm = new Date(FIRE_TARGET.getFullYear(), FIRE_TARGET.getMonth(), 0).getDate();
+        days += pm;
+        months--;
+      }
+      if (months < 0) { months += 12; years--; }
+    }
+    const units = [
+      ['cy', years], ['cmo', months], ['cd', days],
+      ['ch', hours], ['cmi', minutes], ['cs', seconds]
+    ];
+    units.forEach(([id, v]) => {
+      document.getElementById(id).textContent = String(v).padStart(2, '0');
+    });
+    const jp = years + '年' + months + 'ヶ月' + days + '日と' + hours + '時間' + minutes + '分' + seconds + '秒';
+    document.getElementById('cjp').textContent = jp;
+
+    // --- FIRE Progress ---
+    const fireTotal = FIRE_TARGET - BIRTHDAY;
+    const fireElapsed = jst - BIRTHDAY;
+    const firePct = Math.min((fireElapsed / fireTotal) * 100, 100);
+    const fireAgeY = Math.floor(fireElapsed / (365.25 * 24 * 60 * 60 * 1000));
+    const fireAgeM = Math.floor((fireElapsed % (365.25 * 24 * 60 * 60 * 1000)) / (30.44 * 24 * 60 * 60 * 1000));
+    document.getElementById('fire-fill').style.width = firePct + '%';
+    document.getElementById('fire-pct').textContent = firePct.toFixed(1) + '%';
+    document.getElementById('fire-detail').textContent = fireAgeY + '年' + fireAgeM + 'ヶ月 / 45年';
+
+    // --- Life Progress ---
+    const ageMs = jst - BIRTHDAY;
+    const totalLifeMs = LIFE_EXPECTANCY * 365.25 * 24 * 60 * 60 * 1000;
+    const lifePct = (ageMs / totalLifeMs) * 100;
+    const ageY = Math.floor(ageMs / (365.25 * 24 * 60 * 60 * 1000));
+    const ageM = Math.floor((ageMs % (365.25 * 24 * 60 * 60 * 1000)) / (30.44 * 24 * 60 * 60 * 1000));
+    document.getElementById('life-fill').style.width = lifePct.toFixed(4) + '%';
+    document.getElementById('life-pct').textContent = lifePct.toFixed(1) + '%';
+    document.getElementById('life-detail').textContent = ageY + '歳' + ageM + 'ヶ月 / ' + LIFE_EXPECTANCY + '歳';
+
+    // --- Year Progress ---
+    const ys = new Date(jst.getFullYear(), 0, 1);
+    const yp = (jst - ys) / (((new Date(jst.getFullYear(), 1, 29).getDate() === 29) ? 366 : 365) * 86400000) * 100;
+    const doy = Math.floor((jst - ys) / 86400000) + 1;
+    const leap = (new Date(jst.getFullYear(), 1, 29).getDate() === 29) ? 366 : 365;
+    document.getElementById('year-fill').style.width = yp.toFixed(4) + '%';
+    document.getElementById('year-pct').textContent = yp.toFixed(1) + '%';
+    document.getElementById('year-detail').textContent = doy + '日目 / ' + leap + '日';
+
+    // --- Month Progress ---
+    const ms = new Date(jst.getFullYear(), jst.getMonth(), 1);
+    const dim = new Date(jst.getFullYear(), jst.getMonth() + 1, 0).getDate();
+    const mp = ((jst.getDate() - 1 + jst.getHours() / 24) / dim) * 100;
+    document.getElementById('month-fill').style.width = mp.toFixed(4) + '%';
+    document.getElementById('month-pct').textContent = mp.toFixed(1) + '%';
+    document.getElementById('month-detail').textContent = jst.getDate() + '日目 / ' + dim + '日';
+
+    // --- Today Progress ---
+    const ts = new Date(jst.getFullYear(), jst.getMonth(), jst.getDate());
+    const tp = ((jst - ts) / 86400000) * 100;
+    const hh = String(jst.getHours()).padStart(2, '0') + ':' + String(jst.getMinutes()).padStart(2, '0');
+    document.getElementById('today-fill').style.width = tp.toFixed(4) + '%';
+    document.getElementById('today-pct').textContent = tp.toFixed(1) + '%';
+    document.getElementById('today-detail').textContent = hh + ' / 24:00';
+  }
+
+  update();
+  setInterval(update, 1000);
 </script>
 </body>
 </html>
-
